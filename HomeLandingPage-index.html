@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. John Bosco Parish - Tondo</title>
+    <link rel="icon" href="path/to/church-logo.png" type="image/png">
+    <meta name="description" content="Welcome to St. John Bosco Parish - Tondo.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            background: #DFF6FF;
+            color: #000;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* HEADER */
+        header {
+            background: #024950;
+            color: #fff;
+            padding: 20px 40px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        nav ul li.dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        nav ul li.dropdown a i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        nav ul li.dropdown:hover a i {
+            transform: rotate(180deg);
+        }
+
+        /* Mobile responsive navigation */
+        @media(max-width: 992px){
+        #nav-menu { display:none; flex-direction:column; background:#024950; position:fixed; top:0; right:0; height:100%; width:250px; padding:50px 20px; z-index:1002; overflow-y:auto; transition: transform 0.3s ease; transform:translateX(100%);}
+        #nav-menu.active { transform:translateX(0);}
+        #hamburger { display:block; }
+        nav ul li { margin-left:0; margin-bottom:10px; }
+        nav ul li a { font-size:16px; }
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo p {
+            margin: 0;
+            line-height: 1.2;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg,#FFD700,#ffffff,#FFD700);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glowingText 6s linear infinite;
+            transition: opacity 0.5s;
+        }
+
+        @keyframes glowingText {
+            0% { background-position: 0%; }
+            50% { background-position: 100%; }
+            100% { background-position: 0%; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-right: 50px;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        .login-icon {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .login-icon:hover {
+            transform: scale(1.2);
+            filter: brightness(1.2);
+        }
+        /* Dropdown Menu */
+        .dropdown-menu {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #024950;
+            min-width: 140px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        /* Show Dropdown */
+        .login-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Dropdown Links */
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 15px;
+            color: #fff;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #036666;
+            color: #FFD700;
+            border-radius: 4px;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero {
+        background: linear-gradient(135deg, #FFD700, #024950); /* gradient as fallback */
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 73, 80, 0.2); /* reduced opacity */
+            /* or use gradient */
+            /* background: linear-gradient(180deg, rgba(2,73,80,0.4) 0%, rgba(0,0,0,0.2) 100%); */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: #FFD700;
+            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 30px #FFD700;
+        }
+
+        .hero-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 60px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            color: #FFD580; /* Softer, warmer yellow */
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 4px solid #FFD580; /* Typing cursor */
+            box-sizing: border-box;
+            text-transform: uppercase;
+        }
+
+        /* Typing animation */
+        @keyframes typing {
+            0% { width: 0 }
+            100% { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: #FFD580; }
+        }
+
+        /* Apply typing animation */
+        .hero-content h2.typing {
+            width: 0;
+            animation: typing 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+            letter-spacing: 2px;
+        }
+
+        /* Hero paragraph */
+        .hero-content p {
+            font-size: 24px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+            text-shadow: 0 0 5px rgba(0,0,0,0.3);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* SECTIONS */
+
+        section {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+            will-change: opacity, transform;
+        }
+
+        /* When visible */
+        section.in-view {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        section .container {
+        padding: 40px 20px;
+        }
+
+
+        /* Parallax subtle depth */
+        .parallax {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .parallax::after {
+            content: "";
+            position: absolute;
+            top: -30%;
+            left: 0;
+            width: 100%;
+            height: 160%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: translateY(0);
+            transition: transform 0.3s linear;
+        }
+
+
+        section:nth-child(odd) {
+            background: #E5E5E5;
+        }
+
+        section:nth-child(even) {
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #024950;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .button {
+            background: #036666;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #024950;
+        }
+
+        .service-shortcuts {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px;
+            justify-content: flex-start;
+        }
+
+        .service-shortcuts .card {
+            flex: 0 0 auto;
+            min-width: 220px;
+        }
+
+        .service-shortcuts .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0,0,0,0.25);
+        }
+
+        .service-shortcuts .card h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #024950;
+        }
+
+        .service-shortcuts .card p {
+        font-size: 16px;
+        color: #024950;
+        margin-bottom: 15px;
+        }
+
+        .service-shortcuts .button {
+        display: inline-block;
+        background-color: #036666;
+        color: #fff;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 6px;
+        transition: background 0.3s, transform 0.2s;
+        }
+
+        .service-shortcuts .button:hover {
+        background-color: #024950;
+        transform: scale(1.05);
+        }
+
+        .urgent {
+            background: red;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #024950;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #FFD700;
+            animation: glowingLogo 3s linear infinite;
+        }
+
+        /* GLOWING ANIMATIONS */
+        @keyframes glowingText {
+            0% { background-position: 0%; }
+            50% { background-position: 100%; }
+            100% { background-position: 0%; }
+        }
+
+        @keyframes glowingLogo {
+            0%, 100% { box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700; }
+            50% { box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700; }
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            margin-right: 10px;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .black-footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        /* FEEDBACK & BACK TO TOP */
+        .feedback, .back-to-top {
+            position: fixed;
+            right: 20px;
+            background: #036666;
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            font-weight: bold;
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-to-top {
+            bottom: 20px;
+            border-radius: 50%;
+            display: none;
+        }
+
+        .feedback {
+            bottom: 70px;
+            display: none;
+        }
+
+        .feedback-form-container {
+            position: fixed;
+            right: 20px;
+            bottom: 120px;
+            background: #fff;
+            color: #000;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1000;
+            width: 280px;
+        }
+
+        .feedback-form-container h3 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .stars-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            margin: 5px 0;
+        }
+
+        .stars i {
+            font-size: 24px;
+            margin: 0 3px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .stars i:hover, .stars i.active, .stars i:hover ~ i {
+            color: #FFD700;
+        }
+
+        .star-desc {
+            font-size: 14px;
+            margin-top: 3px;
+            text-align: center;
+        }
+
+        @media(max-width:768px) {
+            .logo h1 { font-size: 20px; }
+            nav ul { flex-direction: column; align-items: flex-end; }
+            nav ul li { margin-left: 0; margin-bottom: 10px; }
+            .footer-content { flex-direction: column; }
+            .grid { grid-template-columns: 1fr; }
+        }
+
+        @media(max-width:480px) {
+            .logo h1 { font-size: 16px; }
+            header { padding: 10px; }
+            section { padding: 40px 10px; }
+        }
+
+        header.shrink {
+            padding: 8px 25px;
+        }
+
+        header.shrink .logo img {
+            width: 35px;
+            height: 35px;
+        }
+
+        header.shrink .logo h1 {
+            font-size: 20px;
+        }
+
+        header.shrink .logo p {
+            font-size: 10px;
+        }
+
+        .daily-verse-section, .inspiration-section {
+        padding: 40px 20px;
+        background-color: #fff;
+        }
+
+        .daily-verse-card {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        text-align: center;
+        margin: 0 auto 20px auto;
+        border: 2px solid #c9a300;
+        }
+
+        .daily-verse-card h2 {
+        font-size: 24px;
+        margin-bottom: 12px;
+        color: #024950;
+        }
+
+        .daily-verse-card p {
+        font-size: 18px;
+        color: #024950;
+        line-height: 1.4;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow:0 12px 35px rgba(0,0,0,0.25);
+        }
+
+        .button:hover {
+            box-shadow:0 0 25px #007BFF, 0 0 50px #007BFF, 0 0 75px #007BFF;
+            transform: scale(1.05);
+        }
+
+        .image-collage div:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        #featured-event {
+            padding: 50px 0;
+        }
+
+        .events-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+        }
+
+        .event-card {
+            width: 23%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            padding-bottom: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+
+        .event-card h3 {
+            padding: 10px;
+            font-size: 18px;
+        }
+
+        .event-card p {
+            padding: 0 10px;
+            font-size: 14px;
+        }
+
+        .event-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(0, 80, 160, 0.5);
+        }
+
+
+            #mass-offering {
+            padding: 60px 0;
+            background-image: url('your-background-image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .offering-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+            box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .offering-container:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(50, 100, 180, 0.7);
+        }
+
+        .offering-content h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: #004080;
+        }
+
+        #about {
+            padding: 70px 0;
+            background: linear-gradient(to right, #e3f2ff, #ffffff);
+        }
+
+        .about-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .about-text {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 0 20px rgba(0, 80, 160, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-text:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 25px rgba(0, 70, 150, 0.5);
+        }
+
+        .about-text h2 {
+            font-size: 34px;
+            color: #003d7a;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            font-size: 17px;
+            color: #333;
+        }
+
+        .about-images {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .about-images img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.25);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-images img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 18px rgba(0, 50, 120, 0.5);
+        }
+
+        #services {
+            padding: 70px 0;
+            background: #eef7ff;
+        }
+
+        .services-title {
+            text-align: center;
+            font-size: 34px;
+            color: #003d7a;
+            margin-bottom: 35px;
+        }
+
+        .service-shortcuts {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 0 16px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 0 25px rgba(0,70,150,0.4);
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            color: #003d7a;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 18px;
+        }
+
+        .service-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #0073d0;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-btn:hover {
+            background: #0059a3;
+            box-shadow: 0 0 15px rgba(0,60,120,0.6);
+        }
+            </style>
+            </head>
+            <body>
+
+        <!-- HEADER -->
+    <header>
+    <div class="header-container" style="display:flex; align-items:center; justify-content:space-between; width:100%; padding:0 20px; flex-wrap:wrap;">
+
+        <!-- Left side: Logo + Title + Address -->
+        <div class="logo" style="display:flex; align-items:center; gap:15px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOkNWvO91rEGydCdln4Tl_JfQx9_6vjF1ZVg&s" 
+                alt="Church Logo" 
+                style="width:70px; height:70px; border-radius:50%; border:3px solid #FFD700; box-shadow:0 0 15px #FFD700, 0 0 25px #FFD700;">
+        <div>
+            <h1 id="parish-name" style="font-family:'Montserrat', sans-serif; font-size:36px; font-weight:900; margin:0; text-transform:uppercase; letter-spacing:2px; background:linear-gradient(90deg,#FFD700,#ffffff,#FFD700); background-size:400%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:glowingText 6s linear infinite;">
+            St. John Bosco Parish - Tondo
+            </h1>
+            <p style="font-size:14px; margin:0; color:#FFD700;">Carlos P. Garcia Street, Bo. Magsaysay, 1064, Tondo, Manila</p>
+            <p style="font-size:12px; margin:0; color:#fff;">Serving the Youth Since December 8, 1967</p>
+        </div>
+        </div>
+
+        <!-- Right side: Hamburger + Navigation -->
+        <div style="display:flex; align-items:center; gap:15px;">
+
+        <!-- Hamburger for Mobile -->
+        <div id="hamburger" style="display:none; cursor:pointer; font-size:28px; color:#fff;">
+            <i class="fas fa-bars"></i>
+        </div>
+
+    <!-- Navigation -->
+    <nav id="nav-menu" style="display:flex; align-items:center; gap:20px;">
+        <ul style="display:flex; gap:15px; margin:0; padding:0; list-style:none; align-items:center; flex-wrap:wrap;">
+        <li><a href="#home">Home</a></li>
+        <li class="dropdown about-dropdown">
+        <a href="#about">About <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/parish-information/">Who We Are</a></li>
+        <li><a href="https://donbosco.unaux.com/meet-us/">Meet Us</a></li>
+        <li><a href="https://donbosco.unaux.com/location/">Location</a></li>
+        <li><a href="https://donbosco.unaux.com/contact-us/">Contact Us</a></li>
+        <li><a href="https://www.rcam.org/our-parishes/">RCAM Connection</a></li>
+        </ul>
+        </li>
+        <li class="dropdown events-dropdown">
+        <a href="#events">Events <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/397-2/">Event List</a></li>
+        <li><a href="https://donbosco.unaux.com/volunteer/">Volunteer Sign Up</a></li>
+        <li><a href="https://donbosco.unaux.com/volunteer/">Volunteer Organizations</a></li>
+        </ul>
+        </li>
+        <li class="dropdown mass-dropdown">
+        <a href="#mass">Mass <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/304-2/">Mass Schedule</a></li>
+        <li><a href="https://donbosco.unaux.com/rules-and-regulation/">Mass Rules and Regulations</a></li>
+        <li><a href="https://donbosco.unaux.com/397-2/">Priest Assignments</a></li>
+        </ul>
+        </li>
+        <li class="dropdown services-dropdown">
+        <a href="#services">Services <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/480-2/">Baptism</a></li>
+        <li><a href="https://donbosco.unaux.com/491-2/">Wedding</a></li>
+        <li><a href="https://donbosco.unaux.com/470-2/">Funeral/Memorial</a></li>
+        <li><a href="https://donbosco.unaux.com/474-2/">Service History Page</a></li>
+        </ul>
+        </li>
+        </ul>
+
+        <!-- User Icon -->
+        <div class="dropdown login-dropdown" style="position:relative;">
+        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131478.png" alt="User Icon" class="login-icon" style="width:35px; height:35px; cursor:pointer;">
+        <ul class="dropdown-menu" style="top:100%; right:0;">
+        <li><a href="https://donbosco.unaux.com/wp-login.php">Log In</a></li>
+        <li><a href="https://donbosco.unaux.com/wp-login.php?action=register">Sign Up</a></li>
+        </ul>
+        </div>
+        </nav>
+        </div>
+        </div>
+        </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- HERO -->
+    <section id="home" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="VIDEO_f2ad1545-85db-48b0-aca0-b070c1c81c01.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" style="top:60%; transform:translateY(-100%); text-align:center; padding: 0 20px;">
+            <h2 class="typing" style="font-size:32px; line-height:1.2;">
+                Welcome to Our Parish, The Home of the Youth!
+            </h2>
+            <p style="font-size:16px; max-width:700px; margin:15px auto; line-height:1.5;">
+                In the spirit of Don Bosco, we embrace you with joy and open hearts. Don Bosco often said, 
+                “Do not put off until tomorrow the good you can do today.” So, don't wait! Come as you are 
+                to discover a home where faith is lived with cheerfulness and a community is ready to walk 
+                with you in every step of your life's journey.
+            </p>
+        </div>
+    </section>
+
+
+    <section class="intro-section" style="padding:20px 0; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; max-width:1200px; margin:0 auto;">
+        <!-- DAILY VERSE -->
+        <div class="verse-container" style="background:white; border-radius:15px; overflow:hidden; max-width:500px; width:48%; box-shadow:0 5px 15px rgba(0,0,0,0.2); text-align:center; flex:1; transition: transform 0.3s, box-shadow 0.3s; cursor:pointer;" 
+            onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.3)';" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';">
+            <div class="verse-image" style="background:url('https://www.catholicsun.org/wp-content/uploads/2016/01/Bosco-Portrait.jpg') bottom / cover no-repeat; height:150px; transition: transform 0.3s;">
+            </div>
+            <div class="verse-content" style="padding:15px;">
+                <h2 style="font-size:20px; margin-bottom:10px; color:#333; text-shadow:1px 1px 3px rgba(0,0,0,0.6);">
+                    Daily Verse Card
+                </h2>
+                <p id="daily-verse" style="font-size:14px; color:#333; line-height:1.4; margin:0; text-shadow:1px 1px 2px rgba(0,0,0,0.5);">
+                </p>
+            </div>
+        </div>
+
+        <!-- INSPIRATIONAL MESSAGE -->
+        <div class="inspiration-container" style="background:white; border-radius:15px; overflow:hidden; max-width:500px; width:48%; box-shadow:0 5px 15px rgba(0,0,0,0.2); text-align:center; flex:1; transition: transform 0.3s, box-shadow 0.3s; cursor:pointer;" 
+            onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 25px rgba(0,0,0,0.3)';" 
+            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0,0,0,0.2)';">
+            <div class="inspiration-image" style="background:url('https://www.udb.edu.sv/udb_files/recursos_noticias/1934/imagen.jpg') bottom / cover no-repeat; height:150px; transition: transform 0.3s;">
+            </div>
+            <div class="inspiration-content" style="padding:15px;">
+                <h2 style="font-size:20px; margin-bottom:10px; color:#333; text-shadow:1px 1px 3px rgba(0,0,0,0.6);">
+                    Inspirational Message
+                </h2>
+                <p id="inspiration-msg" style="font-size:14px; color:#333; line-height:1.4; margin:0; text-shadow:1px 1px 2px rgba(0,0,0,0.5);">
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- PARISH MISSION -->
+    <section id="mission" style="padding:50px 20px; background:#cce7ff;">
+        <div class="container" style="max-width:1200px; margin:0 auto; text-align:center;">
+            <div class="mission-card" style="background:white; border-radius:20px; padding:40px; box-shadow:0 8px 25px rgba(0,0,0,0.25); overflow:hidden; position:relative;">
+                <h2 style="font-size:32px; margin-bottom:20px; color:#333; text-shadow:1px 1px 3px rgba(0,0,0,0.5);">Parish Mission Preview</h2>
+                <p style="font-size:18px; color:#555; line-height:1.7; margin-bottom:35px; text-shadow:1px 1px 2px rgba(0,0,0,0.3);">
+                    United in love, service and collaboration, we the Parish of St. John Bosco - Tondo, form a Christ-centered and missionary community, with preferential ministry for the youth, the family and the marginalized, Inspired by St. John Bosco and guided by Mary, Help of Christians, we undertake the path of New Evangelization through lifelong faith formation, meaningful liturgical celebrations, uplifting social services and joyful community building. All for the greater glory of the Triune God.
+                </p>
+                <div class="mission-images" style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;">
+                    <img src="https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/571044789_1135447612009394_3927766613760962909_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE09k3R7yZmZK-tqArV6oynlyr1DybYN9aXKvUPJtg31mqYQvPZzaCuF6hUigJBnb-S_ouMpyCOfq_rlarCAy2r&_nc_ohc=JKh72wMeor4Q7kNvwHYvRFj&_nc_oc=AdkCwcl-NWdpV2h2oKhQ8hlbkJXRfj2JaAW1ai34p-kBjBmmYORV-TH_2Hk-vkl6DWU&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=JStc6jWdhj6Dr0Hf1FBuEA&oh=00_AfhDgND0bkInuHmrNJ9XowSIndTTGXSZXVztewsKGrRhtQ&oe=692F2D7B" alt="St John Bosco 1" class="mission-img" style="width:200px; height:180px; object-fit:cover; border-radius:12px; transition: transform 0.4s, box-shadow 0.4s;">
+                    <img src="https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/538159748_1083346363886186_4124864804887129943_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFljPdNuKgmIFqwaqTMLsz2fu7u4KJaMkV-7u7goloyRVEUQYLVGSNbI7qS6N1Q-crZBDt4wkTaCj1U53_8w4NR&_nc_ohc=KKAFX60SP0UQ7kNvwHEQQ6K&_nc_oc=AdnZobAFlwjHiPvW67bZHA1e6rCd-syOkM25RkFY9o8Ot4QK9CpIlJn2yLXIvFRJG9o&_nc_zt=23&_nc_ht=scontent.fmnl17-3.fna&_nc_gid=TDrvfu2j34PFfYdc2GMx5g&oh=00_AfjERX1SZERVutycdv8eyD5jAzH8uZlbxdYumWx-UpA1Ug&oe=692F5A56" alt="St John Bosco 2" class="mission-img" style="width:200px; height:180px; object-fit:cover; border-radius:12px; transition: transform 0.4s, box-shadow 0.4s;">
+                    <img src="https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/532963196_1078071511080338_4723315999992244260_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeEZ0eDffUqExtNtf23kK1bagNSp-rb0_SKA1Kn6tvT9Inh2wI71AY6BnQTymEAaD46DNHWTKl51l_GaoYjds0lF&_nc_ohc=rrH8wzZhBWcQ7kNvwHJSEBv&_nc_oc=Adl5esdGEVHhy-gkAWCLpmAKhRLwZDlalZ5WY6olCpxTDTzcELGBLWH2z7sGPLHPEqQ&_nc_zt=23&_nc_ht=scontent.fmnl17-2.fna&_nc_gid=agfQPNIq8sUCQsdYQLZgbQ&oh=00_Afh244PUzUb7btD3TdSMVQvuJb5rGuCFWvSC8ij0psx_4w&oe=692F341C" alt="St John Bosco 3" class="mission-img" style="width:200px; height:180px; object-fit:cover; border-radius:12px; transition: transform 0.4s, box-shadow 0.4s;">
+                    <img src="https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/533447898_1077234064497416_5448875460743711684_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeE4JpXkLU_Ve5cg3YKve3NZXXd1al6UnMtdd3VqXpScyycTjiwrZbmHB7-a8jjQr8VGW_JbXN0-9sGcODr1_LQt&_nc_ohc=G0mLBEgo17oQ7kNvwHUmnTq&_nc_oc=AdmzDfolkOsLju6w1pTOvtxmYlmrv7CzLuN6zDbfEAE9qSN3xj0Z48SPJnNIelQhwC0&_nc_zt=23&_nc_ht=scontent.fmnl17-3.fna&_nc_gid=vKieFCZaIrqvkceVlkUpjg&oh=00_Afjc4hJMqGPtM1RZtEJpbuSJ1QeQe5Ep3G3NqEHg3yplJg&oe=692F49CF" alt="St John Bosco 4" class="mission-img" style="width:200px; height:180px; object-fit:cover; border-radius:12px; transition: transform 0.4s, box-shadow 0.4s;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+    // Simple rotating effect
+    let current = 0;
+    const images = document.querySelectorAll('.mission-img');
+
+    setInterval(() => {
+        images.forEach((img, i) => {
+            img.style.transform = 'scale(1)';
+            img.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+        });
+        images[current].style.transform = 'scale(1.1)';
+        images[current].style.boxShadow = '0 10px 25px rgba(0,0,0,0.3)';
+        current = (current + 1) % images.length;
+    }, 2500);
+    </script>
+
+    <!-- QUICK LINKS -->
+    <section id="quick-links">
+    <div class="mass-gallery-section" style="display:flex; justify-content:center; gap:40px; padding:40px 20px; flex-wrap:wrap;">
+
+        <!-- Mass Schedules Card -->
+        <div class="card" style="flex:1; min-width:300px; max-width:500px; background:white; border-radius:20px; padding:30px; text-align:left; box-shadow:0 8px 25px rgba(0,0,0,0.2); transition: transform 0.3s, box-shadow 0.3s;">
+            <h3 style="font-size:28px; color:#333; margin-bottom:15px; text-shadow:1px 1px 2px rgba(0,0,0,0.3);">Mass Schedules</h3>
+            <p style="font-size:16px; color:#555; line-height:1.6; margin-bottom:25px; text-shadow:1px 1px 2px rgba(0,0,0,0.2);">
+                Our parish offers multiple Sunday and weekday masses from morning to evening, often in both English and Filipino (Tagalog), to accommodate the local community. For daily worship, you can attend mass in the early morning or in the evening on weekdays.
+            </p>
+            <a href="https://donbosco.unaux.com/304-2/" class="button" style="display:inline-block; padding:12px 30px; background:#007BFF; color:white; font-weight:bold; border-radius:30px; text-decoration:none; box-shadow:0 5px 15px rgba(0,123,255,0.4); transition: all 0.3s;">
+                View Schedules
+            </a>
+        </div>
+
+        <!-- Image Collage -->
+        <div class="image-collage" style="flex:1; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:15px; max-width:500px; min-width:300px;">
+            <div style="background:url('https://scontent.fmnl17-7.fna.fbcdn.net/v/t39.30808-6/532447918_1077234044497418_8222359939092210465_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFP3rt2Tfa5Xki9yucu8QNWsBwo5bq_BNiwHCjlur8E2PwXUdHS0j5HvZfG_YG8i6WEg4KvNFeNxb7j9LA3B5nR&_nc_ohc=3wbK_EAaaWYQ7kNvwEZ9rOl&_nc_oc=AdlPyO7KC25CG6QodQCJa80QW0zxovXrwNGkqbBjkNmFFRoNz8ZHePj-PhaSg4sWaxQ&_nc_zt=23&_nc_ht=scontent.fmnl17-7.fna&_nc_gid=QwIUtD08BiUlUJiCrPQ3sQ&oh=00_AfhZSXJZBHoHoEo9MHbCcX-lVUZSHA8qECIiT5ENicD1ow&oe=692F5770') center / cover no-repeat; border-radius:15px; height:150px; transition: transform 0.3s;">
+            </div>
+            <div style="background:url('https://scontent.fmnl17-8.fna.fbcdn.net/v/t39.30808-6/531882553_1077231177831038_3037074939306796018_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGHPTDMsO1ffgxVHKsklHWDaCzancfq_qtoLNqdx-r-q0uuXTlCJIQ1Q1084AXDSxzlGRWV6CFe-SHBYJOVu35l&_nc_ohc=xc-UsAO1LeUQ7kNvwFAG4g7&_nc_oc=AdmF5t4amNlExbMBh6G-M4dNorRmJt8svfSplrlp19TK-6NSmJI9wB6-lcZ5ifNMlOk&_nc_zt=23&_nc_ht=scontent.fmnl17-8.fna&_nc_gid=XgcDlh3tl9aCNwwTAg2ZEQ&oh=00_AfjmZ6j6EqhOMN-JINGGyH1blSZCBMfhVePgcZo9fMNfog&oe=692F3D54') center / cover no-repeat; border-radius:15px; height:150px; transition: transform 0.3s;">
+            </div>
+            <div style="background:url('https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/532706762_1077231114497711_69441537880972648_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG11HafAPP416-epQMdf6xJea9HOaBOeip5r0c5oE56KiuW-yC-AlKYGWGQIgXdhSjdKQZeEyVq1tVcQ1JaxRVZ&_nc_ohc=D3PTH2QPjGoQ7kNvwEEHwZS&_nc_oc=AdnrE9Hrjg9saLavq-3wxQ8RQN4i6F3qomMSb_-jtCFQQEHgnIXhCmp0Vo9J9Z9eSP8&_nc_zt=23&_nc_ht=scontent.fmnl17-3.fna&_nc_gid=DD_VCgx7vK3ghyo8kU5_Kw&oh=00_AfjOKqpuSV9vyE5bJ3IUqtqaRbVsEBbstLn_7cU9em2_qQ&oe=692F3ECB') center / cover no-repeat; border-radius:15px; height:150px; transition: transform 0.3s;">
+            </div>
+            <div style="background:url('https://scontent.fmnl17-7.fna.fbcdn.net/v/t39.30808-6/533991072_1077226724498150_4162212246982159746_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFDpifloz3ueWK_0TfFt00GWglKd7B2WYVaCUp3sHZZhT0Us8PImUzO452k-jLQBhdhppBWaoZ34ukOcLHaPKg1&_nc_ohc=bpMCZ3Wz7iEQ7kNvwEewhzC&_nc_oc=AdkN57DW72GV27Rgamjn6CfeAQlNBD4Xf_NYtQOAdKlrqhI44T_VMjrZZaoZtKCRKDU&_nc_zt=23&_nc_ht=scontent.fmnl17-7.fna&_nc_gid=CpH-enYhjxJuEFo19DMc-Q&oh=00_AfhiiXOyU-sNZ1Oi2cKLax8NS3dOUzhXAeDwl5oNxVeIyg&oe=692F6177') center / cover no-repeat; border-radius:15px; height:150px; transition: transform 0.3s;">
+            </div>
+        </div>
+
+    </div>
+            
+    <div class="services-gallery-section" style="display:flex; justify-content:center; gap:40px; padding:40px 20px; flex-wrap:wrap;">
+
+    <!-- Image Collage (Left) -->
+    <div class="image-collage" style="flex:1; display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:15px; max-width:500px; min-width:300px;">
+        <div style="background:url('https://scontent.fmnl17-8.fna.fbcdn.net/v/t39.30808-6/557651517_1422572546541721_6307434467952716054_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH3SQ2PvBloPgPuXzItTr4yzyjP-LDdB6HPKM_4sN0Hoe5lmUS9duRQOPitcfQPwXYwU4201HqOfT9xqdpwiq1S&_nc_ohc=onzEhOgdwXEQ7kNvwEfaybV&_nc_oc=AdnZMGGnTA9KqVAo8JobmgkdSBYP_GE4MYoK06TM9AHpj-52x5_m6wo69BPJyo8onrA&_nc_zt=23&_nc_ht=scontent.fmnl17-8.fna&_nc_gid=xrz9adHPEzKrJhgDN1_1dA&oh=00_AfikF2MI0Ga0mQzG1LHrrCFTSaYPQXCJxJSl2JTDJJYk2g&oe=692F5FE6') center / cover no-repeat; border-radius:15px; height:150px; transition:transform 0.3s;">
+        </div>
+
+        <div style="background:url('https://scontent.fmnl17-2.fna.fbcdn.net/v/t1.6435-9/81539094_520232518592145_1164103606580805632_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=cf85f3&_nc_eui2=AeELoOlouxuKxuachZLXHkOsenYqGskvSSx6dioayS9JLNSZouHvytErR8lJnOgOLUs1eeesE-54z_PRsUMv1MDt&_nc_ohc=AMEk4xDAsyIQ7kNvwEKoNvJ&_nc_oc=AdlIZxHRZ7rrFWh3HmaCqBxjAk3X55Sb5CQFfsR1KPF_Wjs2IB7A3fdAegGn6jN-sWM&_nc_zt=23&_nc_ht=scontent.fmnl17-2.fna&_nc_gid=e6upS4jPwGTWFoxHFgWrJA&oh=00_Afi7SXqJZ2gOtL-kJ_QK497sWdEAyoJ128YEo9APUZco7A&oe=6950F6BD') center / cover no-repeat; border-radius:15px; height:150px; transition:transform 0.3s;">
+        </div>
+
+        <div style="background:url('https://scontent.fmnl17-5.fna.fbcdn.net/v/t39.30808-6/557546634_1422572559875053_7616894094856032065_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEQDHodqgXbKSiZcqtJyvgbONGQ-mo-rH440ZD6aj6sfkjhePcxHNcWAqiUCKAjBvNRCBr04_iEv5KcctqV90M4&_nc_ohc=4yll09uYQKsQ7kNvwG_EjdU&_nc_oc=Admqf-nhUCS1IAjTzBBY-U6jjvmA8AvFOCa8EhtpkHo0ta7734EUG_aprZcZDUp5bo0&_nc_zt=23&_nc_ht=scontent.fmnl17-5.fna&_nc_gid=5XGFBYa5bUuX5i5vrg5beA&oh=00_AfiFfJu1up2su73m1n01SKmt3Axp4oY-D42lOZXvbGwXfg&oe=692F6FCE') center / cover no-repeat; border-radius:15px; height:150px; transition:transform 0.3s;">
+        </div>
+
+        <div style="background:url('https://scontent.fmnl17-1.fna.fbcdn.net/v/t39.30808-6/490806054_1206729991459614_4530192110869319609_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_eui2=AeFm342-G0ROViIphKeeK1S6eIzdCnQOTIR4jN0KdA5MhOlaRpIX6rYMRxdT5_sKYU_mnrv3tyktRvtGBDpzQryC&_nc_ohc=ZTZdIpGqcogQ7kNvwGePW7v&_nc_oc=AdmyoiXOmunTyL5nn2FF4w9qrMjD5TID8h5fyybmXxRpM9QBJJJwJ6hCfPj07rqBb8U&_nc_zt=23&_nc_ht=scontent.fmnl17-1.fna&_nc_gid=vDPqRm2o5skv5-FKHPz7dQ&oh=00_Afi8t9zS3FYAMy-n8MzEdyXKDSF6sX5ibzQUNBMvjKY04g&oe=692F4E2F') center / cover no-repeat; border-radius:15px; height:150px; transition:transform 0.3s;">
+        </div>
+    </div>
+
+    <!-- Parish Services Card (Right) -->
+        <div class="card" style="flex:1; min-width:300px; max-width:500px; background:white; border-radius:20px; padding:30px; text-align:left; box-shadow:0 8px 25px rgba(0,0,0,0.2); transition:transform 0.3s, box-shadow 0.3s;">
+            <h3 style="font-size:28px; color:#333; margin-bottom:15px; text-shadow:1px 1px 2px rgba(0,0,0,0.3);">Parish Services</h3>
+
+            <p style="font-size:16px; color:#555; line-height:1.6; margin-bottom:25px; text-shadow:1px 1px 2px rgba(0,0,0,0.2);">
+                Explore our parish services and sacraments offered to support your spiritual life and growth.
+            </p>
+
+            <a href="#services" class="button" style="display:inline-block; padding:12px 30px; background:#007BFF; color:white; font-weight:bold; border-radius:30px; text-decoration:none; box-shadow:0 5px 15px rgba(0,123,255,0.4); transition:all 0.3s;">
+                Explore Services
+            </a>
+        </div>
+    </div>
+
+    <!-- ANNOUNCEMENTS -->
+    <section id="announcements" style="padding:30px 20px; background:#fff6e5; /* soft warm background for alerts */">
+    <div class="container" style="max-width:800px; margin:0 auto; text-align:center; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.1); padding:25px; background:white;">
+
+        <h2 style="font-size:28px; color:#d9534f; margin-bottom:15px; text-shadow:1px 1px 2px rgba(0,0,0,0.15);">
+        Announcement & Weather Update
+        </h2>
+
+        <!-- Weather widget or manual forecast display -->
+        <div class="weather-widget" style="margin-bottom:20px;">
+        <!-- You could embed a free weather widget here, e.g.: -->
+        <!-- <iframe src="https://weatherwidget.org/widget/YOUR_WIDGET_CODE.html" width="300" height="150" frameborder="0"></iframe> -->
+        <p style="font-size:16px; color:#333;">
+            Current weather in Manila: <strong>Manila, Philippines</strong> — Partly Sunny.  
+        </p>
+        </div>
+
+    <!-- Typhoon / Urgent Notice -->
+        <div class="alert alert-warning" style="background:#ffe5e5; border-radius:8px; padding:15px; margin-bottom:20px; border:1px solid #f5c6cb;">
+        <h3 style="color:#b30000; margin-bottom:10px;">⚠️ Typhoon Alert – Verbena</h3>
+        <p style="font-size:16px; color:#333; line-height:1.5;">
+            Tropical Cyclone <strong>Verbena</strong> has recently intensified into a typhoon and may affect parts of the Philippines. 
+            Please stay alert for announcements from official agencies and prepare for possible weather changes, heavy rains, and strong winds.
+        </p>
+        <p style="font-size:14px; color:#555;">
+            For safety — keep updated, secure loose items, and avoid traveling if possible until conditions improve.
+        </p>
+        </div>
+
+        <!-- Regular Announcement / Message -->
+        <div class="regular-notice" style="font-size:16px; color:#333;">
+        <p><strong>Notice:</strong> Mass schedules may adjust depending on weather conditions. Please check back or contact the parish office before coming.</p>
+        </div>
+
+    </div>
+    </section>
+
+    <!-- FEATURED EVENT -->
+    <section id="featured-event">
+        <div class="container card">
+            <h2>Upcoming Events</h2>
+            <p>Join us for our next parish community gatherings.</p>
+
+            <div class="events-row">
+                <!-- Event 1 -->
+                <div class="event-card">
+                    <img src="https://scontent.fmnl17-2.fna.fbcdn.net/v/t39.30808-6/547831240_1323822356197940_8825139955883108383_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=aa7b47&_nc_eui2=AeHUhoi4NVy1XsPXrZeYEuul5ymByCDV8PTnKYHIINXw9Ci4Hsfr74xjC6jE52pX3VbgEfAPpw0MbhCYqy5B3eOU&_nc_ohc=on-iZVhH8rIQ7kNvwHCxSEn&_nc_oc=AdlOeKdVolBql1FWPD47lfGjXUvLQv7C0JpWcOZiR6N64gsLGlKIvuaLuQEoGwVv9vo&_nc_zt=23&_nc_ht=scontent.fmnl17-2.fna&_nc_gid=blwfARR9QDI4P9JFR-0grA&oh=00_AfjGONxYwW3cCLsdCVloMGc1Xi2f45UR_tEqnxEK_drZuA&oe=692F55C3" alt="Christmas Carnival">
+                    <h3>Annual Christmas Celebration and Carnival</h3>
+                    <p>Opening of the Christmas Carnival at St. John Bosco Parish, known as Busko, in Tondo.</p>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="event-card">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Simple_capiz_parol.jpg/250px-Simple_capiz_parol.jpg" alt="Alay Parol">
+                    <h3>Alay Parol</h3>
+                    <p>A Christmas tradition showing unity as the community offers lanterns at Don Bosco Tondo.</p>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="event-card">
+                    <img src="https://donbosco1tvet.com/wp-content/uploads/2022/03/Don-Bosco-Youth-Center-Tondo-Inc.-Students-Recollection-Batch-18.webp" alt="Simbang Gabi">
+                    <h3>Simbang Gabi</h3>
+                    <p>Nine nights of worship as part of a major Filipino Christmas practice.</p>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="event-card">
+                    <img src="https://scontent.fmnl17-3.fna.fbcdn.net/v/t39.30808-6/488248055_1123404509830575_598085537675050726_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=103&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHxp75WW9kADDXw7lw1Ks09_lh-1ozRi4f-WH7WjNGLh0PXW1w_ltl8Rfsq8s3HVJ9zLz84uNq652vaWvbSOfLz&_nc_ohc=_kg0bQ5WIMkQ7kNvwHqzWvB&_nc_oc=AdnbJIZOFGpVQxByZTh-9Vtf7IQoCYkjFfKsajcXAjVLCRk5RWv-T4cN0R2H63BB1Vs&_nc_zt=23&_nc_ht=scontent.fmnl17-3.fna&_nc_gid=ZlLiE81Wx4xjVBF-ByriYw&oh=00_Afh_7N5LxpTQq88ULjtGtIqSjTyGlleh-ZTQjRUHqtwTKg&oe=692F61FF" alt="Christmas Retreat">
+                    <h3>Christmas Retreat and Recollection</h3>
+                    <p>A reflective gathering preparing the parish community for the season.</p>
+                </div>
+            </div>
+
+            <a href="https://donbosco.unaux.com/304-2/" class="button">See Events</a>
+        </div>
+    </section>
+
+
+    <!-- MAP PREVIEW -->
+    <section id="map">
+    <div class="container card" style="text-align:center; padding:30px;">
+        <h2>Where Are We Located?</h2>
+        <p>Carlos P. Garcia Street, Bo. Magsaysay, 1064, Tondo, Manila</p>
+        <div class="map" style="height:400px; margin-top:20px;">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387.123456789!2d120.957787!3d14.6161533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b566a612e329%3A0x8211aa6c0322c6f1!2sDon%20Bosco%20Youth%20Center!5e0!3m2!1sen!2sph!4v1699999999999" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        </div>
+    </div>
+    </section>
+
+    <!-- MASS OFFERING -->
+    <section id="mass-offering">
+        <div class="offering-container">
+            <div class="offering-content">
+                <h2>Mass Offerings</h2>
+                <p>You can present a financial contribution, wine, fruits, and a prayer as a gesture of support for the parish and its services.</p>
+                <a href="#services" class="button">Offer for Mass</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ABOUT PARISH -->
+    <section id="about">
+        <div class="about-wrapper">
+            <div class="about-text card">
+                <h2>About the Parish</h2>
+                <p>St. John Bosco Parish Tondo started in 1967 with the first Salesian mission in the area, followed by the Don Bosco Youth Center in 1968, and its canonical erection as a parish in 1969. The Salesians formed the mission to address the educational and spiritual needs of the youth in Tondo. Through the years, the parish supported young people through academic training, vocational instruction, and faith formation programs that focused on their growth and development.</p>
+            </div>
+
+            <div class="about-images">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/77Tondo%2C_Manila_Landmarks_03.jpg/2560px-77Tondo%2C_Manila_Landmarks_03.jpg" alt="Parish Image 1">
+                <img src="https://images.squarespace-cdn.com/content/v1/62f874d4d4942d27d6b2684b/cc5e4e0c-97ad-494e-80d9-2b31997b6c3d/P1080994.JPG" alt="Parish Image 2">
+            </div>
+        </div>
+    </section>
+
+        <!-- SERVICE SHORTCUTS -->
+    <section id="services">
+        <h2 class="services-title">Parish Services</h2>
+
+        <div class="service-shortcuts">
+
+            <div class="service-card">
+                <h3>Baptism</h3>
+                <p>The parish guides families through preparation and scheduling for the sacrament of Baptism.</p>
+                <a href="https://donbosco.unaux.com/480-2/" class="service-btn">Request Now</a>
+            </div>
+
+            <div class="service-card">
+                <h3>Marriage</h3>
+                <p>Couples receive assistance in requirements, appointments, and documentation for church weddings.</p>
+                <a href="https://donbosco.unaux.com/491-2/" class="service-btn">Request Now</a>
+            </div>
+
+            <div class="service-card">
+                <h3>Funeral</h3>
+                <p>Families get support in arranging funeral rites and coordinating related parish services.</p>
+                <a href="#https://donbosco.unaux.com/470-2/" class="service-btn">Request Now</a>
+            </div>
+
+            <div class="service-card">
+                <h3>Service History Page</h3>
+                <p>Members request official parish documents needed for sacraments and personal records.</p>
+                <a href="https://donbosco.unaux.com/474-2/" class="service-btn">Check History</a>
+            </div>
+
+        </div>
+    </section>
+        </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Connection: rcam.org </p>
+                <p>Phone: 0932 531 3559</p>
+                <p>Email: donboscoyouthparish.tondo@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/sjbparishtondomanila"><i class="fab fa-facebook-f"></i></a>
+                   <a href="https://www.instagram.com/explore/locations/13485307/don-bosco-tondo/"> <i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/SalMissions"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+    <div class="footer-section" style="text-align:center;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOkNWvO91rEGydCdln4Tl_JfQx9_6vjF1ZVg&s" 
+            alt="Church Logo"
+            style="
+                width:120px;
+                height:120px;
+                border-radius:50%;
+                border:3px solid #FFD700;
+                box-shadow:0 0 15px #FFD700, 0 0 30px #FFD700;
+                margin-bottom:10px;">
+        
+        <h3>St. John Bosco Parish - Tondo</h3>
+        <p>Carlos P. Garcia Street, Bo. Magsaysay, 1064, Tondo, Manila</p>
+        <p>Serving the Youth Since December 8, 1967</p>
+    </div>
+
+
+    <div class="footer-section">
+        <h3>Contact for Concerns</h3>
+        <p>Have questions or concerns? Reach out to us.</p>
+        <a href="mailto:donboscoyouthparish.tondo@gmail.com" class="button">Email Us</a>
+    </div>
+
+    </footer>
+
+        <footer class="black-footer">
+            <p>&copy; 2025 St. John Bosco Parish - Tondo All Rights Reserved. Website Designed by GROUP WOZ BSIT 1-3</p>
+        </footer>
+
+        <!-- FEEDBACK & BACK TO TOP -->
+        <a class="feedback">RATE OUR SERVICE</a>
+        <a href="#home" class="back-to-top">↑</a>
+
+        <div class="feedback-form-container" id="feedback-form">
+            <h3>Rate Our Service</h3>
+            <div class="stars-container">
+                <div class="stars" id="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="star-desc" id="star-desc">Select a star</div>
+            </div>
+            <input type="text" placeholder="Additional Feedback">
+            <button>Submit</button>
+        </div>
+
+        <script>
+            const feedbackBtn = document.querySelector('.feedback');
+            const feedbackForm = document.getElementById('feedback-form');
+            const backBtn = document.querySelector('.back-to-top');
+            const parishName = document.getElementById('parish-name');
+            const stars = document.querySelectorAll('#stars i');
+
+            let originalName = 'St. John Bosco Parish - Tondo';
+            let shortName = 'DON BOSCO - TONDO';
+            let transitioning = false;
+
+            stars.forEach((star, i) => {
+                star.addEventListener('click', () => {
+                    stars.forEach(s => s.classList.remove('active'));
+                    for (let j = 0; j <= i; j++) stars[j].classList.add('active');
+                    document.getElementById('star-desc').textContent = "You rated: " + (i + 1);
+                });
+            });
+
+            window.addEventListener('scroll', () => {
+                backBtn.style.display = (window.pageYOffset > 300) ? 'block' : 'none';
+                feedbackBtn.style.display = ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) ? 'block' : 'none';
+                feedbackForm.style.display = 'none';
+
+                let midpoint = document.body.scrollHeight / 2;
+                let newName = (window.scrollY > midpoint) ? shortName : originalName;
+
+                if(parishName.textContent !== newName && !transitioning) {
+                    transitioning = true;
+                    parishName.style.opacity = 0;
+                    setTimeout(() => {
+                        parishName.textContent = newName;
+                        parishName.style.opacity = 1;
+                        transitioning = false;
+                    }, 500);
+                }
+            });
+
+            feedbackBtn.addEventListener('click', () => {
+                feedbackForm.style.display = feedbackForm.style.display === 'block' ? 'none' : 'block';
+            });
+
+            backBtn.addEventListener('click', e => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) entry.target.classList.add('in-view');
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => observer.observe(section));
+        </script>
+
+        <script>
+        window.addEventListener("scroll", function() {
+            const header = document.querySelector("header");
+            if (window.scrollY > 10) {
+                header.classList.add("shrink");
+            } else {
+                header.classList.remove("shrink");
+            }
+            });
+        </script>
+
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section");
+
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("in-view");
+                    }
+                });
+            },
+            {
+                threshold: 0.2
+            }
+        );
+
+        sections.forEach(sec => observer.observe(sec));
+
+            /* Parallax effect */
+                window.addEventListener("scroll", () => {
+                    document.querySelectorAll(".parallax").forEach(sec => {
+                        let speed = 0.25;
+                        let offset = window.pageYOffset * speed;
+                        sec.style.backgroundPositionY = offset + "px";
+                    });
+                });
+            });
+            </script>
+
+            <script>
+            // DAILY VERSE (random from API)
+            fetch("https://labs.bible.org/api/?passage=random&type=json")
+            .then(response => response.json())
+            .then(data => {
+                const verse = data[0].text + " " + data[0].bookname + " " + data[0].chapter + ":" + data[0].verse;
+                document.getElementById("daily-verse").innerText = verse;
+            });
+
+            // INSPIRATIONAL MESSAGE ROTATOR
+            const inspirations = [
+            "Do not be afraid. Trust in God always. – Archdiocese of Manila",
+            "Let your light shine before others. – Pope Francis",
+            "Peace I leave with you; my peace I give you. – Archdiocese of Manila",
+            "Pray without ceasing and live in faith. – Pope Francis",
+            "Love one another as I have loved you. – Archdiocese of Manila"
+            ];
+
+            const today = new Date();
+            const index = today.getDate() % inspirations.length;
+            document.getElementById("inspiration-msg").innerText = inspirations[index];
+            </script>
+
+        <script>
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        });
+        </script>
+
+    </body>
+
+</html>
