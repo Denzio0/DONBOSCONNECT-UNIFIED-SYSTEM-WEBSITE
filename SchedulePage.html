@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mass Schedule</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+/* Global Reset & Elegant Font */
+body, html {
+    margin: 0;
+ 		padding-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #f0f9ff, #d0f7ff);
+    color: #024950;
+    scroll-behavior: smooth;
+    transition: background 0.5s ease;
+}
+
+        a {
+            text-decoration: none;
+        }
+
+        /* HEADER */
+        header {
+            background: #024950;
+            color: #fff;
+            padding: 20px 40px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        nav ul li.dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        nav ul li.dropdown a i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        nav ul li.dropdown:hover a i {
+            transform: rotate(180deg);
+        }
+
+        /* Mobile responsive navigation */
+        @media(max-width: 992px){
+        #nav-menu { display:none; flex-direction:column; background:#024950; position:fixed; top:0; right:0; height:100%; width:250px; padding:50px 20px; z-index:1002; overflow-y:auto; transition: transform 0.3s ease; transform:translateX(100%);}
+        #nav-menu.active { transform:translateX(0);}
+        #hamburger { display:block; }
+        nav ul li { margin-left:0; margin-bottom:10px; }
+        nav ul li a { font-size:16px; }
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo p {
+            margin: 0;
+            line-height: 1.2;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg,#FFD700,#ffffff,#FFD700);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glowingText 6s linear infinite;
+            transition: opacity 0.5s;
+        }
+
+        @keyframes glowingText {
+            0% { background-position: 0%; }
+            50% { background-position: 100%; }
+            100% { background-position: 0%; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-right: 50px;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        .login-icon {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .login-icon:hover {
+            transform: scale(1.2);
+            filter: brightness(1.2);
+        }
+        /* Dropdown Menu */
+        .dropdown-menu {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #024950;
+            min-width: 140px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        /* Show Dropdown */
+        .login-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Dropdown Links */
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 15px;
+            color: #fff;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #036666;
+            color: #FFD700;
+            border-radius: 4px;
+        }
+
+	        /* FOOTER */
+        footer {
+            background: #024950;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #FFD700;
+            animation: glowingLogo 3s linear infinite;
+        }
+
+        /* GLOWING ANIMATIONS */
+        @keyframes glowingText {
+            0% { background-position: 0%; }
+            50% { background-position: 100%; }
+            100% { background-position: 0%; }
+        }
+
+        @keyframes glowingLogo {
+            0%, 100% { box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700; }
+            50% { box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700; }
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            margin-right: 10px;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .black-footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+/* Mass Schedule Container */
+#mass-schedule-container {
+    width: 90%; 
+    margin: 60px auto;
+    padding: 40px;
+    background: #e6f9ff;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15), 0 0 20px rgba(255,215,0,0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+#mass-schedule-container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25), 0 0 30px rgba(255,215,0,0.3);
+}
+
+#mass-schedule-container h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #024950;
+    text-shadow: 0 0 5px rgba(255,215,0,0.4);
+    margin-bottom: 25px;
+}
+
+/* Table Styling */
+#mass-schedule {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#mass-schedule th, #mass-schedule td {
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#mass-schedule th {
+    background: linear-gradient(90deg, #024950, #016f66);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+#mass-schedule td {
+    background: #fff;
+    color: #024950;
+    border-bottom: 1px solid #ccc;
+}
+
+#mass-schedule tr:hover td {
+    background: #d1f0f0;
+    box-shadow: inset 0 0 15px rgba(255,215,0,0.2);
+}
+
+/* Print Button */
+button {
+    cursor: pointer;
+    font-weight: 700;
+    padding: 12px 30px;
+    background: linear-gradient(90deg, #024950, #017a75);
+    color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,70,80,0.3), 0 0 15px rgba(255,215,0,0.2);
+    transition: all 0.4s ease;
+    display: block;
+    margin: 25px auto 0 auto;
+}
+button:hover {
+    background: linear-gradient(90deg, #017a75, #024950);
+    box-shadow: 0 15px 35px rgba(0,70,80,0.4), 0 0 25px rgba(255,215,0,0.4);
+    transform: translateY(-3px) scale(1.02);
+}
+
+/* Cards Section */
+section.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+    padding: 0 20px;
+}
+
+section.grid .card {
+    background: #fff;
+    border-radius: 25px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.1), 0 0 15px rgba(255,215,0,0.15);
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+section.grid .card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2), 0 0 30px rgba(255,215,0,0.3);
+}
+section.grid .card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+section.grid .card img:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 25px rgba(255,215,0,0.3);
+}
+section.grid h2 {
+    font-size: 1.6rem;
+    color: #024950;
+    margin-bottom: 12px;
+    text-shadow: 0 0 5px rgba(255,215,0,0.4);
+}
+section.grid p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 { font-size: 2.5rem; }
+    #mass-schedule th, #mass-schedule td { padding: 10px 12px; font-size: 0.9rem; }
+}
+</style>
+</head>
+<body>
+
+	        <!-- HEADER -->
+    <header>
+    <div class="header-container" style="display:flex; align-items:center; justify-content:space-between; width:100%; padding:0 20px; flex-wrap:wrap;">
+
+        <!-- Left side: Logo + Title + Address -->
+        <div class="logo" style="display:flex; align-items:center; gap:15px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOkNWvO91rEGydCdln4Tl_JfQx9_6vjF1ZVg&s"
+                alt="Church Logo"
+                style="width:70px; height:70px; border-radius:50%; border:3px solid #FFD700; box-shadow:0 0 15px #FFD700, 0 0 25px #FFD700;">
+        <div>
+            <h1 id="parish-name" style="font-family:'Montserrat', sans-serif; font-size:36px; font-weight:900; margin:0; text-transform:uppercase; letter-spacing:2px; background:linear-gradient(90deg,#FFD700,#ffffff,#FFD700); background-size:400%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:glowingText 6s linear infinite;">
+            St. John Bosco Parish - Tondo
+            </h1>
+            <p style="font-size:14px; margin:0; color:#FFD700;">Carlos P. Garcia Street, Bo. Magsaysay, 1064, Tondo, Manila</p>
+            <p style="font-size:12px; margin:0; color:#fff;">Serving the Youth Since December 8, 1967</p>
+        </div>
+        </div>
+
+        <!-- Right side: Hamburger + Navigation -->
+        <div style="display:flex; align-items:center; gap:15px;">
+
+        <!-- Hamburger for Mobile -->
+        <div id="hamburger" style="display:none; cursor:pointer; font-size:28px; color:#fff;">
+            <i class="fas fa-bars"></i>
+        </div>
+
+    <!-- Navigation -->
+    <nav id="nav-menu" style="display:flex; align-items:center; gap:20px;">
+        <ul style="display:flex; gap:15px; margin:0; padding:0; list-style:none; align-items:center; flex-wrap:wrap;">
+        <li><a href="https://donbosco.unaux.com/homepage/">Home</a></li>
+        <li class="dropdown about-dropdown">
+        <a href="#about">About <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/parish-information/">Who We Are</a></li>
+        <li><a href="https://donbosco.unaux.com/meet-us/">Meet Us</a></li>
+        <li><a href="https://donbosco.unaux.com/location/">Location</a></li>
+        <li><a href="https://donbosco.unaux.com/contact-us/">Contact Us</a></li>
+        <li><a href="https://www.rcam.org/our-parishes/">RCAM Connection</a></li>
+        </ul>
+        </li>
+        <li class="dropdown events-dropdown">
+        <a href="#events">Events <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/397-2/">Event List</a></li>
+        <li><a href="https://donbosco.unaux.com/volunteer/">Volunteer Sign Up</a></li>
+        <li><a href="https://donbosco.unaux.com/volunteer/">Volunteer Organizations</a></li>
+        </ul>
+        </li>
+        <li class="dropdown mass-dropdown">
+        <a href="#mass">Mass <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/304-2/">Mass Schedule</a></li>
+        <li><a href="https://donbosco.unaux.com/rules-and-regulation/">Mass Rules and Regulations</a></li>
+        <li><a href="https://donbosco.unaux.com/397-2/">Priest Assignments</a></li>
+        </ul>
+        </li>
+        <li class="dropdown services-dropdown">
+        <a href="#services">Services <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/480-2/">Baptism</a></li>
+        <li><a href="https://donbosco.unaux.com/491-2/">Wedding</a></li>
+        <li><a href="https://donbosco.unaux.com/470-2/">Funeral/Memorial</a></li>
+        <li><a href="https://donbosco.unaux.com/474-2/">Service History Page</a></li>
+        </ul>
+        </li>
+        </ul>
+
+        <!-- User Icon -->
+        <div class="dropdown login-dropdown" style="position:relative;">
+        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131478.png" alt="User Icon" class="login-icon" style="width:35px; height:35px; cursor:pointer;">
+        <ul class="dropdown-menu" style="top:100%; right:0;">
+        <li><a href="https://donbosco.unaux.com/wp-login.php">Log In</a></li>
+        <li><a href="https://donbosco.unaux.com/wp-login.php?action=register">Sign Up</a></li>
+        </ul>
+        </div>
+        </nav>
+        </div>
+        </div>
+        </header>
+
+<div id="mass-schedule-container">
+    <h2>Mass Schedules and Liturgical Events</h2>
+    <button onclick="window.print()">Print Schedule</button>
+    <div class="overflow-x-auto mt-4">
+        <table id="mass-schedule">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Morning</th>
+                    <th>Afternoon/Evening</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Monday</td><td>6:30am</td><td>6:00pm</td></tr>
+                <tr><td>Tuesday</td><td>6:30am</td><td>6:00pm</td></tr>
+                <tr><td>Wednesday</td><td>6:30am</td><td>6:00pm</td></tr>
+                <tr><td>Thursday</td><td>6:30am</td><td>6:00pm</td></tr>
+                <tr><td>Friday</td><td>6:30am</td><td>6:00pm</td></tr>
+                <tr><td>Saturday</td><td>6:30am</td><td>6:00pm</td></tr>
+                <tr><td>Sunday</td><td>4:45am, 6:00am, 7:15am, 8:30am, 9:45am</td><td>3:45pm, 5:00pm, 6:15pm, 7:30pm</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<section class="grid">
+    <div class="card">
+        <img src="http://donbosco.unaux.com/wp-content/uploads/2025/11/events.jpeg" alt="Events">
+        <h2>Upcoming Events</h2>
+        <p>View and manage all your scheduled events in one organized place. Detailed event info, dates, and notifications included.</p>
+    </div>
+    <div class="card">
+        <img src="http://donbosco.unaux.com/wp-content/uploads/2025/11/volunteers.jpeg" alt="Volunteers">
+        <h2>Volunteer Management</h2>
+        <p>Coordinate, assign, and communicate with volunteers efficiently. Track roles and participation for each event.</p>
+    </div>
+    <div class="card">
+        <img src="http://donbosco.unaux.com/wp-content/uploads/2025/11/priests.jpg" alt="Priests">
+        <h2>Priest Assignment</h2>
+        <p>Monitor and manage priest schedules, assignments, and availability. Ensures smooth liturgical planning.</p>
+    </div>
+</section>
+
+       <!-- FOOTER -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Connection: rcam.org </p>
+                    <p>Phone: 0932 531 3559</p>
+                    <p>Email: donboscoyouthparish.tondo@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/sjbparishtondomanila"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/explore/locations/13485307/don-bosco-tondo/"> <i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/SalMissions"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section" style="text-align:center;">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOkNWvO91rEGydCdln4Tl_JfQx9_6vjF1ZVg&s"
+                         alt="Church Logo"
+                         style="
+                             width:120px;
+                             height:120px;
+                             border-radius:50%;
+                             border:3px solid #FFD700;
+                             box-shadow:0 0 15px #FFD700, 0 0 30px #FFD700;
+                             margin-bottom:10px;">
+                   
+                    <h3>St. John Bosco Parish - Tondo</h3>
+                    <p>Carlos P. Garcia Street, Bo. Magsaysay, 1064, Tondo, Manila</p>
+                    <p>Serving the Youth Since December 8, 1967</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact for Concerns</h3>
+                    <p>Have questions or concerns? Reach out to us.</p>
+                    <a href="mailto:donboscoyouthparish.tondo@gmail.com" class="button">Email Us</a>
+                </div>
+            </div>
+        </footer>
+
+        <footer class="black-footer">
+            <p>© 2025 St. John Bosco Parish - Tondo All Rights Reserved. Website Designed by GROUP WOZ BSIT 1-3</p>
+        </footer>
+    </div>
+
+    <script>
+        function scrollToForm() {
+            document.getElementById("volunteer-form").scrollIntoView({ behavior: "smooth" });
+        }
+
+        // Hamburger toggle for mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+    </script>

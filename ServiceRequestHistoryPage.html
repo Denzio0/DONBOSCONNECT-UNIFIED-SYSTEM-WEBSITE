@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Service Requests History</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <link rel="stylesheet" href="../style.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Open+Sans:wght@300;400;600;700&family=Montserrat:wght@300;400;600;700;900&family=Raleway:wght@200;300;400;500&family=Anton&family=Roboto:wght@300;400;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+	
+<style>
+/* --------------------------------------------------
+   RESET + GLOBAL SETTINGS
+-------------------------------------------------- */
+* { 
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+body {
+  margin-top: 80px;
+  margin-bottom: 150px;
+  font-family: "Work Sans", sans-serif;
+  background: linear-gradient(120deg, #DFF6FF, #E0F7FA);
+  color: #024950;
+}
+
+/* --------------------------------------------------
+   TYPOGRAPHY
+-------------------------------------------------- */
+h1 {
+  font-family: Montserrat, sans-serif;
+  font-size: 48px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+}
+
+h2 {
+  font-size: 30px;
+  font-family: Raleway, sans-serif;
+  text-align: center;
+  margin: 20px 0;
+  color: #024950;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #1d8cf8;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+h3 {
+  font-size: 22px;
+  font-family: Roboto, sans-serif;
+  text-align: center;
+  margin: 15px 0;
+}
+
+/* --------------------------------------------------
+   HERO HEADER
+-------------------------------------------------- */
+.hero {
+  background-image: url("http://donbosco.unaux.com/wp-content/uploads/2025/11/IMG_20241130_140726_915-scaled.jpg");
+  background-size: cover;
+  background-position: center center;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+}
+
+/* Hero fade animation */
+.hero h1 {
+  animation: fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------
+   PARISH LOGO SECTION
+-------------------------------------------------- */
+.parish-logo img {
+  width: 225px;
+  height: 200px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.parish-logo img:hover {
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+section[style*="background-color: #024a50"] {
+  border-radius: 15px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+section[style*="background-color: #024a50"]:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+}
+
+/* --------------------------------------------------
+   HISTORY TABLE
+-------------------------------------------------- */
+.history-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  background: white;
+}
+
+.history-table th, .history-table td {
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.history-table thead {
+  background: linear-gradient(90deg, #1d8cf8, #036666);
+  color: white;
+  text-transform: uppercase;
+}
+
+.history-table tbody tr:nth-child(even) {
+  background-color: #f3faff;
+}
+
+.history-table tbody tr:hover {
+  background-color: #d1f0ff;
+  transform: scale(1.01);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* --------------------------------------------------
+   STATUS BADGES
+-------------------------------------------------- */
+.status {
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: transform 0.2s ease;
+}
+
+.status:hover {
+  transform: scale(1.05);
+}
+
+.status.pending { background: #ffcc00; color: #3a3a00; }
+.status.approved { background: #2ecc71; color: white; }
+.status.denied { background: #cc532e; color: white; }
+.status.cancelled { background: #e74c3c; color: white; }
+
+/* --------------------------------------------------
+   BUTTONS
+-------------------------------------------------- */
+button {
+  padding: 8px 16px;
+  margin: 3px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-btn { background: #1d8cf8; color: white; }
+.resched-btn { background: #ffcc00; color: #3a3a00; }
+.cancel-btn { background: #e74c3c; color: white; }
+
+button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+/* --------------------------------------------------
+   FEEDBACK SECTION
+-------------------------------------------------- */
+.info-block {
+  background: linear-gradient(135deg, #ffffff, #e0f7fa);
+  padding: 35px;
+  border-radius: 15px;
+  max-width: 850px;
+  margin: 50px auto;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.stars {
+  font-size: 32px;
+  letter-spacing: 5px;
+  cursor: pointer;
+  color: #cccccc;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.stars:hover {
+  color: #f4c430;
+  transform: scale(1.2);
+}
+
+.name-group textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  resize: none;
+  font-size: 14px;
+  margin: 10px 0;
+  transition: all 0.3s ease;
+}
+
+.name-group textarea:focus {
+  border-color: #1d8cf8;
+  box-shadow: 0 4px 15px rgba(29,140,248,0.3);
+  outline: none;
+}
+
+.feedback-btn {
+  background: #036666;
+  color: white;
+  width: 180px;
+}
+
+.feedback-btn:hover {
+  background: #049191;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* --------------------------------------------------
+   RESPONSIVE
+-------------------------------------------------- */
+@media (max-width: 768px) {
+  .history-table th, .history-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  h1 { font-size: 36px; }
+  h2 { font-size: 24px; }
+  h3 { font-size: 18px; }
+}
+	
+		       html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            background: #DFF6FF;
+            color: #000;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* HEADER */
+        header {
+            background: #024950;
+            color: #fff;
+            padding: 20px 40px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        nav ul li.dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        nav ul li.dropdown a i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        nav ul li.dropdown:hover a i {
+            transform: rotate(180deg);
+        }
+
+        /* Mobile responsive navigation */
+        @media(max-width: 992px){
+        #nav-menu { display:none; flex-direction:column; background:#024950; position:fixed; top:0; right:0; height:100%; width:250px; padding:50px 20px; z-index:1002; overflow-y:auto; transition: transform 0.3s ease; transform:translateX(100%);}
+        #nav-menu.active { transform:translateX(0);}
+        #hamburger { display:block; }
+        nav ul li { margin-left:0; margin-bottom:10px; }
+        nav ul li a { font-size:16px; }
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            transition: transform 0.3s;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo p {
+            margin: 0;
+            line-height: 1.2;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg,#FFD700,#ffffff,#FFD700);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glowingText 6s linear infinite;
+            transition: opacity 0.5s;
+        }
+
+        @keyframes glowingText {
+            0% { background-position: 0%; }
+            50% { background-position: 100%; }
+            100% { background-position: 0%; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-right: 50px;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFD700;
+        }
+
+        .login-icon {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.3s, filter 0.3s;
+        }
+
+        .login-icon:hover {
+            transform: scale(1.2);
+            filter: brightness(1.2);
+        }
+        /* Dropdown Menu */
+        .dropdown-menu {
+            opacity: 0;
+            transform: translateY(-10px);
+            pointer-events: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #024950;
+            min-width: 140px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1001;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        /* Show Dropdown */
+        .login-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Dropdown Links */
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 15px;
+            color: #fff;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dropdown-menu li a:hover {
+            background: #036666;
+            color: #FFD700;
+            border-radius: 4px;
+        }
+
+	        /* FOOTER */
+        footer {
+            background: #024950;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #FFD700;
+            animation: glowingLogo 3s linear infinite;
+        }
+
+        /* GLOWING ANIMATIONS */
+        @keyframes glowingText {
+            0% { background-position: 0%; }
+            50% { background-position: 100%; }
+            100% { background-position: 0%; }
+        }
+
+        @keyframes glowingLogo {
+            0%, 100% { box-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700; }
+            50% { box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700; }
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            margin-right: 10px;
+            color: #fff;
+            font-size: 22px;
+        }
+
+        .black-footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+	
+</style>
+
+</head>
+
+<body>
+	        <!-- HEADER -->
+    <header>
+    <div class="header-container" style="display:flex; align-items:center; justify-content:space-between; width:100%; padding:0 20px; flex-wrap:wrap;">
+
+        <!-- Left side: Logo + Title + Address -->
+        <div class="logo" style="display:flex; align-items:center; gap:15px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOkNWvO91rEGydCdln4Tl_JfQx9_6vjF1ZVg&s"
+                alt="Church Logo"
+                style="width:70px; height:70px; border-radius:50%; border:3px solid #FFD700; box-shadow:0 0 15px #FFD700, 0 0 25px #FFD700;">
+        <div>
+            <h1 id="parish-name" style="font-family:'Montserrat', sans-serif; font-size:36px; font-weight:900; margin:0; text-transform:uppercase; letter-spacing:2px; background:linear-gradient(90deg,#FFD700,#ffffff,#FFD700); background-size:400%; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:glowingText 6s linear infinite;">
+            St. John Bosco Parish - Tondo
+            </h1>
+            <p style="font-size:14px; margin:0; color:#FFD700;">Carlos P. Garcia Street, Bo. Magsaysay, 1064, Tondo, Manila</p>
+            <p style="font-size:12px; margin:0; color:#fff;">Serving the Youth Since December 8, 1967</p>
+        </div>
+        </div>
+
+        <!-- Right side: Hamburger + Navigation -->
+        <div style="display:flex; align-items:center; gap:15px;">
+
+        <!-- Hamburger for Mobile -->
+        <div id="hamburger" style="display:none; cursor:pointer; font-size:28px; color:#fff;">
+            <i class="fas fa-bars"></i>
+        </div>
+
+    <!-- Navigation -->
+    <nav id="nav-menu" style="display:flex; align-items:center; gap:20px;">
+        <ul style="display:flex; gap:15px; margin:0; padding:0; list-style:none; align-items:center; flex-wrap:wrap;">
+        <li><a href="https://donbosco.unaux.com/homepage/">Home</a></li>
+        <li class="dropdown about-dropdown">
+        <a href="#about">About <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/parish-information/">Who We Are</a></li>
+        <li><a href="https://donbosco.unaux.com/meet-us/">Meet Us</a></li>
+        <li><a href="https://donbosco.unaux.com/location/">Location</a></li>
+        <li><a href="https://donbosco.unaux.com/contact-us/">Contact Us</a></li>
+        <li><a href="https://www.rcam.org/our-parishes/">RCAM Connection</a></li>
+        </ul>
+        </li>
+        <li class="dropdown events-dropdown">
+        <a href="#events">Events <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/397-2/">Event List</a></li>
+        <li><a href="https://donbosco.unaux.com/volunteer/">Volunteer Sign Up</a></li>
+        <li><a href="https://donbosco.unaux.com/volunteer/">Volunteer Organizations</a></li>
+        </ul>
+        </li>
+        <li class="dropdown mass-dropdown">
+        <a href="#mass">Mass <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/304-2/">Mass Schedule</a></li>
+        <li><a href="https://donbosco.unaux.com/rules-and-regulation/">Mass Rules and Regulations</a></li>
+        <li><a href="https://donbosco.unaux.com/397-2/">Priest Assignments</a></li>
+        </ul>
+        </li>
+        <li class="dropdown services-dropdown">
+        <a href="#services">Services <i class="fas fa-caret-down"></i></a>
+        <ul class="dropdown-menu">
+        <li><a href="https://donbosco.unaux.com/480-2/">Baptism</a></li>
+        <li><a href="https://donbosco.unaux.com/491-2/">Wedding</a></li>
+        <li><a href="https://donbosco.unaux.com/470-2/">Funeral/Memorial</a></li>
+        <li><a href="https://donbosco.unaux.com/474-2/">Service History Page</a></li>
+        </ul>
+        </li>
+        </ul>
+
+        <!-- User Icon -->
+        <div class="dropdown login-dropdown" style="position:relative;">
+        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131478.png" alt="User Icon" class="login-icon" style="width:35px; height:35px; cursor:pointer;">
+        <ul class="dropdown-menu" style="top:100%; right:0;">
+        <li><a href="https://donbosco.unaux.com/wp-login.php">Log In</a></li>
+        <li><a href="https://donbosco.unaux.com/wp-login.php?action=register">Sign Up</a></li>
+        </ul>
+        </div>
+        </nav>
+        </div>
+        </div>
+        </header>
+	
+    <h1 class="font-hero" style="color: white;">SERVICE REQUESTS HISTORY</h1>
+
+  <section style="background-color: #024a50; color: white; padding: 35px; margin-bottom: 50px;">
+    <div class="parish-logo" style="text-align: center;">
+      <img src="http://donbosco.unaux.com/wp-content/uploads/2025/11/13564-removebg-preview.png" alt="SJB Logo" style="width: 225px; height: 200px;">
+    </div>
+    <!-- Tentative content -->
+      <p style="text-align: center;">
+      We appreciate the participation and support you have given our community! 
+      We hope to receive your continued faith and aid in spreading the words of God!
+    </p>
+  </section>
+  
+  <section class="history-container">
+    <h2 class="font-raleway">Your Service Requests History:</h2>
+    <section class="history-container">
+ 
+  <table class="history-table">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Date Requested</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>Baptism</td>
+        <td>Nov 28, 2025</td>
+        <td><span class="status pending">Pending</span></td>
+        <td>
+          <button class="view-btn">View</button>
+          <button class="resched-btn">Reschedule</button>
+          <button class="cancel-btn">Cancel</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Marriage</td>
+        <td>Nov 28, 2025</td>
+        <td><span class="status approved">Approved</span></td>
+        <td>
+          <button class="view-btn">View</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td>Funeral</td>
+        <td>Nov 28, 2025</td>
+        <td><span class="status denied">Denied</span></td>
+        <td>
+          <button class="view-btn">View</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</section>
+</section>
+
+<section class="info-block">
+  <h2 class="font-raleway">Send Us A Feedback!</h2>
+
+  <div class="stars">
+    ★★★★★
+  </div>
+  <div class="name-group">
+  <textarea placeholder="Feedbacks..."></textarea>
+  </div>
+
+  <div class="btn-group">
+    <button class="feedback-btn">Submit Feedback</button>
+  </div>
+</section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Connection: rcam.org </p>
+                <p>Phone: 0932 531 3559</p>
+                <p>Email: donboscoyouthparish.tondo@gmail.com</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/sjbparishtondomanila"><i class="fab fa-facebook-f"></i></a>
+                   <a href="https://www.instagram.com/explore/locations/13485307/don-bosco-tondo/"> <i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/SalMissions"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+    <div class="footer-section" style="text-align:center;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOkNWvO91rEGydCdln4Tl_JfQx9_6vjF1ZVg&s"
+            alt="Church Logo"
+            style="
+                width:120px;
+                height:120px;
+                border-radius:50%;
+                border:3px solid #FFD700;
+                box-shadow:0 0 15px #FFD700, 0 0 30px #FFD700;
+                margin-bottom:10px;">
+       
+        <h3>St. John Bosco Parish - Tondo</h3>
+        <p>Carlos P. Garcia Street, Bo. Magsaysay, 1064, Tondo, Manila</p>
+        <p>Serving the Youth Since December 8, 1967</p>
+    </div>
+
+
+    <div class="footer-section">
+        <h3>Contact for Concerns</h3>
+        <p>Have questions or concerns? Reach out to us.</p>
+        <a href="mailto:donboscoyouthparish.tondo@gmail.com" class="button">Email Us</a>
+    </div>
+
+    </footer>
+
+        <footer class="black-footer">
+            <p>© 2025 St. John Bosco Parish - Tondo All Rights Reserved. Website Designed by GROUP WOZ BSIT 1-3</p>
+        </footer>
